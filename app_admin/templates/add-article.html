@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+    <div class="container">
+         <div class="row">
+             <div class="col-md-12">
+                 <h2 class="text-center">Saisir articles</h2>
+                 <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                      {{form}}
+                    <button class="btn btn-primary btn-block">enregister</button>
+                 </form>
+
+               
+             </div>
+
+         </div>
+    </div>
+   
+    
+{% endblock %}

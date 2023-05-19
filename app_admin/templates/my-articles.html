@@ -1,0 +1,59 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+      <form class="d-flex">
+        
+        {% if user.is_authenticated %}
+          <span class="nav-link" >{{user.username}}</span>
+          {% endif %}
+          
+       </form>
+    </div>
+  </div>
+</nav>
+   <div class="col-md-12"><h2> Mes articles </h2></div>
+    <div class="col-md-12">
+        <a href="{% url 'ajouter-article'%}" class="btn btn-secondary float-right"><i class="fas fa-plus">Ajoutter article</i></a>
+    </div>
+    
+   {% if list_articles%}
+   <div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="h5">Titre</th>
+                     <th class="h5">Description</th>
+                    <th class="h5">Action</th>
+    
+                </tr>
+            </thead>
+             <tbody>
+                  {% for article in list_articles %}
+                <tr>
+                    <td><a href="#"  style="text-decoration:none;" > {{article}}</a></td>
+                    <td><a href="#"  style="text-decoration:none;"> {{article.intro}}</a></td>
+                     <td>
+                        <a href="{% url 'update-article' article.id %}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                        {% if has_perm %}
+                        <a href="{% url 'delete-article' article.id %}" class="btn btn-danger btn-sm" ><i class="fas fa-trash"></i></a>
+                          {% endif %}
+                     </td>
+                    
+                </tr>
+                {% endfor %}
+            
+        </tbody>
+            
+        </table>
+    
+   </div>
+   </div>
+   
+        
+    
+         {% else %}
+                 <p> vous n'avez pas encore publier d'articles </p>
+                  {% endif %}
+    
+
+{% endblock %}

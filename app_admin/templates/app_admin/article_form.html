@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+      <form class="d-flex">
+        
+        {% if user.is_authenticated %}
+          <span class="nav-link" >{{user.username}}</span>
+          {% endif %}
+         
+       </form>
+    </div>
+  </div>
+</nav>
+    <div class="container">
+         <div class="row">
+             <div class="col-md-12">
+           <div class="card mt-4">
+            <div class="card-body">
+                      <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button class="btn btn-success btn-block mt-4">Modifier l'article</button>
+
+    </form>
+            {% endblock %}
+   
+   
+    
+    

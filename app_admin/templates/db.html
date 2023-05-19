@@ -1,0 +1,10 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+      <form class="d-flex">
+        
+        {% if user.is_authenticated %}
+          <span class="nav-link" >{{user.username}}</span>
+          {% endif %}
+          
+       </form>
+   {% endblock %}

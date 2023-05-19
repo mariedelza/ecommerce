@@ -1,0 +1,43 @@
+
+
+.navbar {
+    background-color:crimson;
+    padding: 40px;
+    font-size: 30px;
+    color: #ffffff;
+}
+.nav-item{
+    font-style: italic;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-right: 80px;
+}
+
+.navbar li:hover {
+    background-color:red;
+
+    
+}
+.logo{
+    padding:0;
+    margin: 0;
+    font-size: 30px;
+    color: #ffffff;
+}
+.footer{
+    font-family: 'poppins', sans-serif;
+    background: #111;
+    padding: 30px 20px;
+    color: #fff;
+}
+
+.footer span a {
+    color: crimson;
+    text-decoration: none;
+}
+
+.footer span a:hover {
+    text-decoration: underline;
+}
