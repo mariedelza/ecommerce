@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'app_admin',
+    'app_auth',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,4 @@ MEDIA_ROOT = BASE_DIR / 'images/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL="/auth/login"

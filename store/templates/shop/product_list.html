@@ -1,0 +1,41 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+
+<div class="row mt-2">
+  {% for product in products %}
+  <div class="col-md-4">
+    <div class="card shadow mb-4">
+      <img src="{{ product.image }}" class="card-img-top" >
+      <div class="card-body">
+        <div id="aa{{ product.id }}" class="card-title text-warning"><h1>{{product.title|upper}}</h1></div>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text">Catégorie : {{ product.category.name }}</p>
+         <div id="price{{ product.id }}" style="color:red" class="card-text">Prix: {{product.price}}</div>
+        <button id="{{ product.id }}" class="btn ted btn-success">Ajouter</button>
+      </div>
+    </div>
+  </div>
+  {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div>
+    <div class="row">
+  {% endif %}
+  {% endfor %}
+</div>
+
+
+
+
+
+{% endblock  %}
+
+
+
+{% comment %} 
+<h2>{{ category.name }}</h2>
+<ul>
+{% for product in products %}
+    <li>{{ product.name }} - {{ product.price }}</li>
+{% empty %}
+    <li>No products found.</li>
+{% endfor %}
+</ul> {% endcomment %}

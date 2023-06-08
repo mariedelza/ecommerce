@@ -3,15 +3,67 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="list-group" id="item-list">
-            <h3 class="text-center"> Liste de vos produits selectionnes dans votre panier merci de valider !!</h3>
-  
- 
+            <h3 class="text-center"> Liste de vos produits selectionnes dans votre panier merci de valider votre commande!!</h3>
         </ul>
     </div>
 </div>
-    
-
-
+<div class="row mt-5">
+    <div class="col-md-12">
+        <form method="POST" novalidate id="order-form">
+            {% csrf_token %}
+            <input type="hidden" id="items" name="items" required>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputName">Nom</label>
+                    <input required type="text" name="nom" class="form-control" id="nom" placeholder="nom" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputName">Prenom</label>
+                    <input type="text" name="prenom" class="form-control" id="prenom" placeholder="Prenom" required>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="ndiayemariedelza@gmail.com" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputAddress">Addresse</label>
+                <input type="text" name="address" class="form-control" id="address" placeholder="1234 Senegal" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputCity">ville</label>
+                <input type="text" name="ville" class="form-control" id="ville" placeholder="donner le nom de la ville" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputState">Pays</label>
+                <select id="pays" name="pays" class="form-control" placeholder="donner le nom du Pays" required>
+                    <option selected>Senegal</option>
+                    <option>france</option>
+                    <option>cameroun</option>
+                    <option>cote d'ivoire</option>
+                    <option>benin</option>
+                    <option>allemagne</option>
+                     <option>italie</option>
+                    <option>maroc</option>
+                     <option>los angeles</option>
+                    <option>benin</option>
+                    <option>togo</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputZip">Zip</label>
+                <input name="zipcode" id="zipcode" type="text" class="form-control">
+            </div>
+        </div>
+         <div class="form-group col-md-6">
+                <label for="inputZip">Somme total a payer</label>
+                <input name="total" id="total" type="readonly" class=" bg-dark text-warning form-control">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary order-btn">Commander</button>
+    </form>
+</div>
+</div>
 {% endblock %}
  {% block js %}
  <script type="text/javascript">
@@ -21,16 +73,39 @@
     }else{
         panier=JSON.parse(localStorage.getItem('panier'));
     }
+    var total=0;
+    var nombre=0;
     for(item in panier){
         let nom = panier[item][1];
         let quantite = panier[item][0];
+        let prix =panier[item][2]
+        nombre +=quantite;
+        total +=prix;
         let itemString= `<li class="list-group-item d-flex justify-content-between align-items-center">
                 ${nom}
-           <span class="badge badge-primary badge-pill"> QTE ${quantite}</span>
+                <span class="badge badge-primary badge-pill"> QTE: ${quantite}</span>
+                 <span class="badge badge-warning badge-pill"> prix: ${prix}</span>
         </li>`;
          $('#item-list').append(itemString);
     }
+     let itemNombre= `<li class="list-group-item d-flex justify-content-between align-items-center">
+                <b class="bg-danger"> PRIX ET QUANTITE TOTAL</b>
+                <span class="badge badge-secondary badge-pill"> Total QTE: ${nombre}</span>
+                 <span class="badge badge-success badge-pill"> Total Somme: ${total} fcfa</span>
+        </li>`;
+         $('#item-list').append(itemNombre);
+         $('#total').val(total+" fcfa");
+
+
+    $('#items').val(JSON.stringify(panier));
    
+    $(document).on("click", ".order-btn", function(event){
+        event.preventDefault()
+        console.log("clicked")
+       localStorage.removeItem("panier")
+       $("#order-form").submit()
+    })
+    
 
  </script>
  

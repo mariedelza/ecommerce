@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<h1 class="my-4 border-botton pb-1 text-center">Liste de nos differents category de produits vendus.</h1>
+<div class="row">
+  {% for category in categories %}
+  <div class="col-md-4">
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <h3 class="card-title">{{ category.name|upper }}</h3>
+        <h6 class="card-text text-danger">Date publication : {{ category.date_added|date:"d/m/Y H:i"  }}</h6>
+        <a href="{% url 'product_list' category_id=category.id %}" class="btn btn-primary">{{ category.name }}</a>
+      </div>
+    </div>
+  </div>
+  {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div>
+    <div class="row">
+  {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock  %}
