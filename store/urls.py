@@ -1,12 +1,18 @@
-from django.urls import path
+
+from rest_framework.routers import DefaultRouter
+from django.urls import path,include
 from store.views import index,detail,checkout,confirmation,category_list, product_list,contact
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .api import productViewSet
+router = DefaultRouter()
+router.register(r'product',productViewSet,basename='product')
 
 
 
 urlpatterns = [
+    path('api/',include(router.urls)),
     path('',index, name="home"),
      path('ajouter/', views.ajouter_article, name='ajouter'),
     path('<int:myid>', detail,name="detail"),
